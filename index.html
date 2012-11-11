@@ -83,7 +83,7 @@
         	}
         	
         	window.ondeviceorientation = function(event) {
-        		$('#glow').css('-webkit-transform', 'rotate('+beta.toString()+'deg)');
+        		$('#glow').css('-webkit-transform', 'rotate('+event.beta.toString()+'deg)');
         	}
         	
             $(function(){
