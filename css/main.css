@@ -65,10 +65,94 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+#main {
+	background: url(../img/bg.png);
+	background-size: 320px 460px;
+	width: 320px;
+	height: 460px;
+}
 
+#status {
+	width: 100%;
+	text-align: center;
+	color: #6f778d;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.4);
+	
+	position: absolute;
+	top: 80px;
+	width: 100%;
+	font-size: 100px;
+	font-family: 'Helvetica';
+	font-weight: 800;
+	text-transform: uppercase;
+}
 
+#status #time, #status #end {
+	display: none;
+}
 
+#status #percent {
+	/* 140x161 */
+	
+}
 
+/*#status #percent::after {
+	background: url(../img/percent.png);
+	background-size: 41px 41px;
+	content: " ";
+	display: block;
+	width: 41px;
+	height: 41px;
+	position: absolute;
+	left: 140px;
+	top: 90px;
+}*/
+
+@-webkit-keyframes knob /* Safari and Chrome */
+{
+	to { -webkit-transform: rotate(180deg); }
+}
+
+#knob {
+	width: 218px;
+	height: 218px;
+	position: absolute;
+	left: 51px;
+	top: 243px;
+	animation-timing-function: linear;
+	-webkit-animation-timing-function: linear;
+}
+
+#knob > div {
+	background-size: 218px 218px;
+	width: 218px;
+	height: 218px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#knob #bg {
+	background: url(../img/knob.png);
+}
+
+#knob #glow {
+	background: url(../img/knob_glow.png);
+}
+
+#knob #arrow {
+	background: url(../img/knob_arrow.png);
+	background-size: 218px 218px;
+}
+
+#power {
+	background: url(../img/power.png);
+	width: ;
+	height: ;
+	position: absolute;
+	top: ;
+	left: ;
+}
 
 
 

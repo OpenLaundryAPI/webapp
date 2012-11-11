@@ -6,7 +6,7 @@
         <title>Open Laundry API web app</title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="640">
+        <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="cleartype" content="on">
 
@@ -31,13 +31,66 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     </head>
     <body>
 
         <!-- Add your site or application content here -->
+        <div id="main">
+        	<div id="status">
+        		<div id="percent"></div>
+        		<div id="time"></div>
+        		<div id="end">end</div>
+        	</div>
+        	<div id="knob">
+        		<div id="bg"></div>
+        		<div id="glow"></div>
+        		<div id="arrow"></div>
+        	</div>
+        	<a href="" id="power"></a>
+        </div>
 
         <script src="js/vendor/zepto.min.js"></script>
         <script src="js/helper.js"></script>
+        
+        <script>
+        	function seconds(time) {
+        		splitted = time.split(':');
+				return parseInt(splitted[0]) * 60 * 60 +
+					   parseInt(splitted[1]) * 60 +
+					   parseInt(splitted[2]);
+        	}
+        	
+        	function refresh() {
+        		jQuery.getJSON('http://openlaundryapi.org/api/device/washingmachine/', function(response){
+        		    if (response['status'] == 'WORKING') {
+        		        $('#arrow').css('-webkit-transform', 'rotate('+((parseInt(response['progress']) / 100) * 180).toString()+'deg)')
+        		        		   .css('-webkit-animation', 'knob '+seconds(response['time_remaining'])+'s')
+        		        		   .css('-webkit-animation-timing-function', 'linear');
+						
+						$('#percent').text(response['progress']+'%');        		
+						$('#time').text(response['time_remaining'].split(':').splice(0, 2).join(':'));
+						
+						$('#status > div').hide();
+						$('#percent').show();        		        		  
+        		  	} else {
+        		  		$('#arrow').css('-webkit-transform', 'rotate(0deg)')
+        		  				   .css('-webkit-animation', 'none');
+        		  		$('#status > div').hide();
+        		  		$('#end').show();
+        		  	}        		 
+        		});
+        	}
+        	
+        	window.ondeviceorientation = function(event) {
+        		$('#glow').css('-webkit-transform', 'rotate('+beta.toString()+'deg)');
+        	}
+        	
+            $(function(){
+                window.setInterval(refresh, 5000);
+                refresh();
+            });
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
