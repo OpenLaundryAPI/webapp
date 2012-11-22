@@ -1,1 +1,3 @@
-openlaundryapi-webapp.esproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
